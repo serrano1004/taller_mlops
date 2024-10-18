@@ -7,6 +7,16 @@ from sklearn.model_selection import train_test_split
 import argparse
 import mlflow
 import mlflow.tensorflow
+import yaml
+
+with open('params.yaml') as f:
+    params = yaml.safe_load(f)
+
+epochs = params['model']['epochs']
+batch_size = params['model']['batch_size']
+learning_rate = params['model']['learning_rate']
+
+data_path = './data'
 
 # Establecer la URI de tracking de MLflow para S3
 mlflow.set_tracking_uri('s3://mlopstest123456')
