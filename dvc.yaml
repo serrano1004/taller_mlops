@@ -1,0 +1,8 @@
+stages:
+  train:
+    cmd: python src/train.py --data_path data/chest_xray --epochs ${model.epochs} --batch_size ${model.batch_size}
+    deps:
+      - data/chest_xray
+      - src/train.py
+    outs:
+      - models/cancer_detection_model.h5
