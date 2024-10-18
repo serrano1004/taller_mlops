@@ -35,6 +35,7 @@ jobs:
 
     - name: Pull data from DVC storage
       run: |
+        dvc repro
         dvc pull
 
     - name: Train model
