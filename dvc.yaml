@@ -6,3 +6,6 @@ stages:
       - src/train.py
     outs:
       - models/cancer_detection_model.h5
+    params:
+      - params.yaml
+
