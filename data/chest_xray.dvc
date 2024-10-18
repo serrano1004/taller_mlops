@@ -3,3 +3,4 @@ outs:
   size: 2483915296
   nfiles: 17591
   path: chest_xray
+  hash: md5
