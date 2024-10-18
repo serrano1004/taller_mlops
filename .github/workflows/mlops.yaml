@@ -33,9 +33,12 @@ jobs:
         dvc remote modify myremote access_key_id AKIA6ODU2ZDFGAK4S3EU
         dvc remote modify myremote secret_access_key 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
 
-    - name: Pull data from DVC storage
+    - name: Repro data
       run: |
         dvc repro
+        
+    - name: Pull data from DVC storage
+      run: |
         dvc pull
 
     - name: Train model
