@@ -4,3 +4,5 @@ fsspec==2023.3.0
 dvc_s3
 numpy
 scikit-learn
+scmrepo
+keras
