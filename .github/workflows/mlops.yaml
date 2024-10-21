@@ -36,7 +36,7 @@ jobs:
        
     - name: Pull data from DVC storage
       run: |
-        dvc pull
+        dvc pull -f
     
     - name: Train model
       run: |
@@ -44,7 +44,7 @@ jobs:
 
     - name: Push trained model to DVC
       run: |
-        dvc add models/cancer_detection_model.h5
-        git add models/cancer_detection_model.h5.dvc
+        dvc add models/cancer_detection_model.h5 -f
+        git add models/cancer_detection_model.h5.dvc -f
         git commit -m "Add trained model"
-        dvc push
+        dvc push -f
