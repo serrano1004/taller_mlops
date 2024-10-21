@@ -30,7 +30,7 @@ jobs:
     
     - name: Config aws credentials
       run: |
-        dvc remote add -d myremote ${{ secrets.AWS_S3_BUCKET_URL }}
+        dvc remote add -d myremote ${{ secrets.AWS_S3_BUCKET_URL }} --force
         dvc remote modify myremote access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
         dvc remote modify myremote secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -44,7 +44,7 @@ jobs:
 
     - name: Train model
       run: |
-        python3 src/train.py --data_path data/chest_xray --epochs 10 --batch_size 32
+        python3 src/train.py --data_path data/chest_xray --epochs ${model.epochs} --batch_size ${model.batch_size}
 
     - name: Push trained model to DVC
       run: |
