@@ -12,6 +12,7 @@ on:
 jobs:
   train_model:
     runs-on: ubuntu-latest
+    environment: mlops_test
 
     steps:
     - name: Checkout repository
@@ -29,9 +30,9 @@ jobs:
     
     - name: Config aws credentials
       run: |
-        dvc remote add -d myremote s3://mlopstest123456/dvc-storage
-        dvc remote modify myremote access_key_id AKIA6ODU2ZDFGAK4S3EU
-        dvc remote modify myremote secret_access_key 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
+        dvc remote add -d myremote ${{ secrets.AWS_S3_BUCKET_URL }}
+        dvc remote modify myremote access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+        dvc remote modify myremote secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Repro data
       run: |

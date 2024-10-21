@@ -15,11 +15,10 @@ with open('params.yaml') as f:
 epochs = params['model']['epochs']
 batch_size = params['model']['batch_size']
 learning_rate = params['model']['learning_rate']
-
-data_path = './data'
+data_path_default = params['data']['path']  # Cargar el valor por defecto de data_path
 
 # Establecer la URI de tracking de MLflow para S3
-mlflow.set_tracking_uri('s3://mlopstest123456')
+mlflow.set_tracking_uri('${{ secrets.AWS_S3_BUCKET_URL }}')
 
 # Iniciar un experimento en MLflow
 mlflow.set_experiment('cancer_detection_experiment')
@@ -80,9 +79,15 @@ def train(data_path, epochs, batch_size):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_path', type=str, required=True, help='Ruta a los datos de entrenamiento')
-    parser.add_argument('--epochs', type=int, default=10, help='Número de épocas de entrenamiento')
-    parser.add_argument('--batch_size', type=int, default=32, help='Tamaño del lote')
+    
+    # Usar el valor de data_path de params.yaml como valor por defecto
+    parser.add_argument('--data_path', type=str, default=data_path_default, help='Ruta a los datos de entrenamiento')
+    
+    # Usar los valores de epochs y batch_size de params.yaml como valores por defecto
+    parser.add_argument('--epochs', type=int, default=epochs, help='Número de épocas de entrenamiento')
+    parser.add_argument('--batch_size', type=int, default=batch_size, help='Tamaño del lote')
     
     args = parser.parse_args()
+    
+    # Si no se proporcionan valores para data_path, epochs o batch_size, se usarán los de params.yaml
     train(args.data_path, args.epochs, args.batch_size)

@@ -1,9 +1,11 @@
 stages:
   train:
-    cmd: python3 src/train.py --data_path data/chest_xray --epochs 10 --batch_size 32
+    cmd: python3 src/train.py --data_path data/chest_xray --epochs ${model.epochs} --batch_size ${model.batch_size}
     deps:
       - data/chest_xray
       - src/train.py
     outs:
       - models/cancer_detection_model.h5
+    params:
+      - params.yaml
 
