@@ -1,5 +1,6 @@
 outs:
-- md5: 12f5544d55adad6e1be9afec2495a0bd.dir
-  size: 2483915296
-  nfiles: 17591
-  path: data/chest_xray
+- md5: d751713988987e9331980363e24189ce.dir
+  size: 0
+  nfiles: 0
+  path: chest_xray
+  hash: md5
