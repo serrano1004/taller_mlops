@@ -36,7 +36,7 @@ jobs:
        
     - name: Train model
       run: |
-        python3 src/train.py --data_path data/chest_xray --epochs ${model.epochs} --batch_size ${model.batch_size}
+        python3 src/train.py --data_path data/chest_xray --epochs 10 --batch_size 32
     
     - name: Pull data from DVC storage
       run: |
