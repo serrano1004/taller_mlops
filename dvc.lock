@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python3 src/train.py --data_path data/chest_xray --epochs 10 --batch_size
+      32
+    deps:
+    - path: data/chest_xray
+      md5: f4e3305ee6cf0412398f15e5764970fa.dir
+      size: 2473389580
+      nfiles: 11720
+    - path: src/train.py
+      md5: 21b536ed249006afe5a5b06c725b0d2d
+      size: 4097
+    params:
+      params.yaml:
+        data.path: data/chest_xray
+        model.batch_size: 32
+        model.epochs: 10
+    outs:
+    - path: models/cancer_detection_model.h5
+      md5: da7e9e883e6e1ce1bfef93fede0c7894
+      size: 33950912
