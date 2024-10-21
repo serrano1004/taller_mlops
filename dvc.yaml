@@ -7,5 +7,7 @@ stages:
     outs:
       - models/cancer_detection_model.h5
     params:
-      - params.yaml
+      - model.epochs
+      - model.batch_size
+      - data.path
 

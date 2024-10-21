@@ -80,13 +80,18 @@ El objetivo de esta PoC es crear un flujo de trabajo automatizado para el entren
           branches:
             - main
 
+        pull_request:
+
+        workflow_dispatch:
+
       jobs:
         train_model:
           runs-on: ubuntu-latest
+          environment: mlops_test
 
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v2
+            uses: actions/checkout@v4
 
           - name: Set up Python
             uses: actions/setup-python@v2
@@ -97,13 +102,24 @@ El objetivo de esta PoC es crear un flujo de trabajo automatizado para el entren
             run: |
               python -m pip install --upgrade pip
               pip install -r requirements.txt
-              pip install dvc mlflow tensorflow
+          
+          - name: Config aws credentials
+            run: |
+              dvc remote add -d myremote ${{ secrets.AWS_S3_BUCKET_URL }} --force
+              dvc remote modify myremote access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+              dvc remote modify myremote secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-          - name: Pull data from DVC
-            run: dvc pull
+          - name: Repro data
+            run: |
+              dvc repro --force
+              
+          - name: Pull data from DVC storage
+            run: |
+              dvc pull
 
           - name: Train model
-            run: python src/train.py --data_path data/chest_xray --epochs 10 --batch_size 32
+            run: |
+              python3 src/train.py --data_path data/chest_xray --epochs ${model.epochs} --batch_size ${model.batch_size}
 
           - name: Push trained model to DVC
             run: |
