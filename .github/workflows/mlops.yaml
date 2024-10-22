@@ -23,10 +23,10 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
     
     - name: Add dataset to DVC
       run: |
@@ -42,7 +42,7 @@ jobs:
 
     - name: Pull data from DVC storage
       run: |
-        dvc pull -f
+        dvc pull -vv -f
     
     - name: Train model
       run: |
