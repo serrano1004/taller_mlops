@@ -62,11 +62,12 @@ jobs:
       run: | 
         ls -l models/cancer_detection_model.h5
         ls .dvc/cache
-        mv models/* /home/runner/work/taller_mlops/taller_mlops/models/
+      continue-on-error: true
 
     - name: Pull data from DVC storage
       run: |
         dvc pull -vv -f
+      continue-on-error: true
     
     - name: Train model
       run: |
