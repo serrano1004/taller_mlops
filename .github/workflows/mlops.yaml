@@ -20,8 +20,8 @@ jobs:
 
     - name: Update and upgrade
       run: |
-        apt update
-        apt upgrade -y
+        sudo apt-get update
+        sudo apt-get upgrade -y
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -39,6 +39,7 @@ jobs:
         curl -L -o ./data/archive.zip https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia
         unzip ./data/archive.zip
         dvc add data/chest_xray
+      continue-on-error: true
 
     - name: Config aws credentials
       run: |
@@ -48,7 +49,6 @@ jobs:
 
     - name: Install AWS CLI
       run: |
-        sudo apt-get update
         sudo apt-get install -y awscli
 
     - name: Configure AWS credentials
