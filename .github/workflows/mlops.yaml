@@ -30,6 +30,7 @@ jobs:
     
     - name: Add dataset to DVC
       run: |
+        ls -la
         dvc add data/chest_xray
 
     - name: Config aws credentials
