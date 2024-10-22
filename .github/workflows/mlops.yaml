@@ -33,8 +33,14 @@ jobs:
         mkdir -p ./data/chest_xray
         curl -L -o ./data/archive.zip https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia
         unzip ./data/archive.zip
+        echo "ls"
         ls -la
+        echo "ls de data"
         ls -la ./data
+        echo "ls de chest_xray"
+        ls -la ./chest_xray
+        mv ./chest_xray/{*,.*} ./data/chest_xray
+        echo "ls de data -> chest_xray"
         ls -la ./data/chest_xray
         dvc add data/chest_xray
       continue-on-error: true
