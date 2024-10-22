@@ -5,5 +5,6 @@ dvc_s3
 numpy
 scikit-learn
 scmrepo
-keras
+keras==3.6.0
 mlflow
+pandas

@@ -98,9 +98,10 @@ def train(data_path, epochs, batch_size):
     mlflow.log_metric("test_accuracy", test_accuracy)
 
     # Guardar el modelo y registrarlo en MLflow
-    model_path = 'models/cancer_detection_model.h5'
+    input_example = {"input": np.array([[...]], dtype=np.float32)} 
+    model_path = 'models/cancer_detection_model.keras'
     model.save(model_path)
-    mlflow.keras.log_model(model, "model")
+    mlflow.keras.log_model(model, "model", signature=mlflow.models.infer_signature(inputs=input_example))
 
     # Finalizar tracking de MLflow
     mlflow.end_run()
