@@ -60,7 +60,7 @@ jobs:
 
     - name: Check if model is downloaded
       run: | 
-        ls -l models/cancer_detection_model.h5
+        ls -la models/cancer_detection_model.h5
         ls .dvc/cache
       continue-on-error: true
 
@@ -71,6 +71,8 @@ jobs:
     
     - name: Train model
       run: |
+        ls -la data
+        ls -la data/chest_xray
         python3 src/train.py --data_path data/chest_xray --epochs 10 --batch_size 32
 
     - name: Push trained model to DVC
