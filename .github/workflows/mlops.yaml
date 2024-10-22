@@ -61,6 +61,8 @@ jobs:
     - name: Check if model is downloaded
       run: | 
         ls -l models/cancer_detection_model.h5
+        ls .dvc/cache
+        mv models/* /home/runner/work/taller_mlops/taller_mlops/models/
 
     - name: Pull data from DVC storage
       run: |
