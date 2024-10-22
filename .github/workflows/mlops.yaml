@@ -28,12 +28,20 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
+    - name: Initialize DVC
+      run: |
+        dvc init
+
+    - name: Add dataset to DVC
+      run: |
+        dvc add data/chest_xray
+
     - name: Config aws credentials
       run: |
         dvc remote add -d myremote ${{ secrets.AWS_S3_BUCKET_URL }} --force
         dvc remote modify myremote access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
         dvc remote modify myremote secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-       
+
     - name: Pull data from DVC storage
       run: |
         dvc pull -f
@@ -45,6 +53,4 @@ jobs:
     - name: Push trained model to DVC
       run: |
         dvc add models/cancer_detection_model.h5 -f
-        git add models/cancer_detection_model.h5.dvc -f
-        git commit -m "Add trained model"
         dvc push -f
