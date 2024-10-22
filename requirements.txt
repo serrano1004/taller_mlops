@@ -2,8 +2,8 @@ tensorflow==2.13.0
 dvc==2.34.0
 fsspec==2023.3.0
 dvc_s3
-# numpy
-# scikit-learn
-# scmrepo
-# keras
-# mlflow
+numpy
+scikit-learn
+scmrepo
+keras
+mlflow
