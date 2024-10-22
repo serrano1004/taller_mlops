@@ -18,6 +18,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Update and upgrade
+      run: |
+        apt update
+        apt upgrade -y
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -27,17 +32,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
-    - name: Initialize DVC
-      run: |
-        dvc init -f
-    
+ 
     - name: Add dataset to DVC
       run: |
         mkdir -p ./data/chest_xray
-        cd data
-        curl -L -o ./archive.zip https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia
-        unzip archive.zip
+        curl -L -o ./data/archive.zip https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia
+        unzip ./data/archive.zip
         dvc add data/chest_xray
 
     - name: Config aws credentials
