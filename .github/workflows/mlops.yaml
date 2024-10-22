@@ -36,7 +36,7 @@ jobs:
       run: |
         mkdir -p ./data/chest_xray
         cd data
-        curl -L -o . https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia
+        curl -L -o ./archive.zip https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia
         unzip archive.zip
         dvc add data/chest_xray
 
