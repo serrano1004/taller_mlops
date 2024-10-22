@@ -28,10 +28,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Initialize DVC
-      run: |
-        dvc init
-
     - name: Add dataset to DVC
       run: |
         dvc add data/chest_xray
